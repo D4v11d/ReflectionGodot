@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dysaejmmiy63j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ha06w"]
+size = Vector2(732.133, 1165.91)
+
+[node name="MinimalMirror" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(555.5, 128.943)
+scale = Vector2(0.168002, 0.150858)
+shape = SubResource("RectangleShape2D_ha06w")
+
+[node name="01Minimal" type="Sprite2D" parent="."]
+position = Vector2(556, 140)
+scale = Vector2(0.1, 0.1)

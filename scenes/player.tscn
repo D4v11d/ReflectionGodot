@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt7f7rvuli7cp"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_rufih"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14p5r"]
+radius = 15.5153
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(1.36, 1.32)
+script = ExtResource("1_rufih")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(63.8571, -3.65625)
+scale = Vector2(1.11429, 1.15625)
+polygon = PackedVector2Array(-9, 17, -25, 49, 10, 49, -9, 17)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(55.147, 38.6364)
+shape = SubResource("CircleShape2D_14p5r")

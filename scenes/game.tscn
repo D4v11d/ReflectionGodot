@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://i73b5gb8cc41"]
+
+[ext_resource type="PackedScene" uid="uid://c3f1y6oudbfxh" path="res://scenes/mirror.tscn" id="1_x8n6r"]
+[ext_resource type="PackedScene" uid="uid://dt7f7rvuli7cp" path="res://scenes/player.tscn" id="1_yonv0"]
+[ext_resource type="PackedScene" uid="uid://dsdvdgeoyvncw" path="res://scenes/mirror-upside-down.tscn" id="2_nyymr"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(-9.98398, 495)
+
+[node name="Level1UpsideDown" type="Node" parent="."]
+
+[node name="Mirror" parent="Level1UpsideDown" instance=ExtResource("1_x8n6r")]
+position = Vector2(-66, 725)
+
+[node name="Polygon2D" type="Polygon2D" parent="Level1UpsideDown"]
+position = Vector2(-626.252, -414.773)
+scale = Vector2(2.08348, 1.63066)
+polygon = PackedVector2Array(15, 534, 1141, 534, 1141, 650.517, 15, 650)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level1UpsideDown/Polygon2D"]
+position = Vector2(9.36935, -376.109)
+scale = Vector2(0.998791, 0.998771)
+
+[node name="Level1" type="Node" parent="."]
+
+[node name="Mirror" parent="Level1" instance=ExtResource("2_nyymr")]
+position = Vector2(-48, 1295)
+
+[node name="Polygon2D" type="Polygon2D" parent="Level1"]
+position = Vector2(-630, -224)
+scale = Vector2(2.08348, 1.63066)
+polygon = PackedVector2Array(15, 534, 1141, 534, 1141, 650.517, 15, 650)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level1/Polygon2D"]
+position = Vector2(9.36935, -376.109)
+scale = Vector2(0.998791, 0.998771)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(589.984, -496)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Player" parent="." instance=ExtResource("1_yonv0")]
+z_index = 1
+position = Vector2(158.984, -119)
+collision_layer = 2
+collision_priority = 2.0

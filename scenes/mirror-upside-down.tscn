@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsdvdgeoyvncw"]
+
+[ext_resource type="Script" path="res://scripts/mirror.gd" id="1_nxbnd"]
+[ext_resource type="Texture2D" uid="uid://bhyl27fkcwc1o" path="res://assets/Mirrors/blue-512.png" id="2_fmsvq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4odfv"]
+size = Vector2(158, 208)
+
+[node name="Mirror" type="Node2D"]
+position = Vector2(521, -86)
+script = ExtResource("1_nxbnd")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(573, -364)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_fmsvq")
+flip_h = true
+flip_v = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(572, -347)
+shape = SubResource("RectangleShape2D_4odfv")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
