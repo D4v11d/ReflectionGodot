@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsgfhokq3q6ya"]
+
+[ext_resource type="Script" path="res://scripts/polygon_structure.gd" id="1_6o2tf"]
+
+[node name="Polygon-structure" type="Polygon2D"]
+polygon = PackedVector2Array(-150, -47, 176, -47, 176, 57, -150, 57)
+script = ExtResource("1_6o2tf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]

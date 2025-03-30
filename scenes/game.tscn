@@ -1,46 +1,82 @@
-[gd_scene load_steps=4 format=3 uid="uid://i73b5gb8cc41"]
+[gd_scene load_steps=5 format=3 uid="uid://i73b5gb8cc41"]
 
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_372e3"]
 [ext_resource type="PackedScene" uid="uid://c3f1y6oudbfxh" path="res://scenes/mirror.tscn" id="1_x8n6r"]
 [ext_resource type="PackedScene" uid="uid://dt7f7rvuli7cp" path="res://scenes/player.tscn" id="1_yonv0"]
-[ext_resource type="PackedScene" uid="uid://dsdvdgeoyvncw" path="res://scenes/mirror-upside-down.tscn" id="2_nyymr"]
+[ext_resource type="PackedScene" uid="uid://dsgfhokq3q6ya" path="res://scenes/polygon-structure.tscn" id="2_kqinp"]
 
 [node name="Game" type="Node2D"]
 position = Vector2(-9.98398, 495)
 
-[node name="Level1UpsideDown" type="Node" parent="."]
-
-[node name="Mirror" parent="Level1UpsideDown" instance=ExtResource("1_x8n6r")]
-position = Vector2(-66, 725)
-
-[node name="Polygon2D" type="Polygon2D" parent="Level1UpsideDown"]
-position = Vector2(-626.252, -414.773)
-scale = Vector2(2.08348, 1.63066)
-polygon = PackedVector2Array(15, 534, 1141, 534, 1141, 650.517, 15, 650)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Level1UpsideDown/Polygon2D"]
-position = Vector2(9.36935, -376.109)
-scale = Vector2(0.998791, 0.998771)
+[node name="GameManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_372e3")
 
 [node name="Level1" type="Node" parent="."]
 
-[node name="Mirror" parent="Level1" instance=ExtResource("2_nyymr")]
-position = Vector2(-48, 1295)
+[node name="Background" type="Polygon2D" parent="Level1"]
+position = Vector2(-42, 351)
+color = Color(0.513726, 0.811765, 1, 0.666667)
+polygon = PackedVector2Array(-1845, 1022, -1766, -658, 2980, -743, 2856, 1322)
 
-[node name="Polygon2D" type="Polygon2D" parent="Level1"]
-position = Vector2(-630, -224)
-scale = Vector2(2.08348, 1.63066)
-polygon = PackedVector2Array(15, 534, 1141, 534, 1141, 650.517, 15, 650)
+[node name="Mirror" parent="Level1" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("1_x8n6r")]
+position = Vector2(352, 611)
+scale = Vector2(1.5, 1.485)
+mirror_to_go = NodePath("../../Level1UpsideDown/Mirror")
+camera_to_go = NodePath("../../Level1UpsideDown/Camera2")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Level1/Polygon2D"]
-position = Vector2(9.36935, -376.109)
-scale = Vector2(0.998791, 0.998771)
+[node name="Polygon-structure" parent="Level1" instance=ExtResource("2_kqinp")]
+position = Vector2(535.957, 1079.08)
+scale = Vector2(10.9264, 7.38461)
+color = Color(0.0220733, 0.38855, 0.511378, 1)
+polygon = PackedVector2Array(-150, -47, -78.9792, -47.5418, -80.5351, 55.375, 173.071, 47.5208, 176, 4.42142, 176, 57, 11.9672, 57, -150, 57, -150, 7.54408)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(589.984, -496)
+[node name="Polygon-structure2" parent="Level1" instance=ExtResource("2_kqinp")]
+position = Vector2(550.582, -6.29456)
+scale = Vector2(10.7905, 5.12797)
+color = Color(0.0220733, 0.38855, 0.511378, 1)
+polygon = PackedVector2Array(-150, -47, 8.56482, -47.0001, 176, -47, 175.47, 58.1701, 41.7419, 58.5601, 41.8173, 23.5128, -9.97001, 23.4585, -9.97001, 57.195, -150, 57)
+
+[node name="Polygon-structure3" parent="Level1" instance=ExtResource("2_kqinp")]
+position = Vector2(328, 824)
+color = Color(0.0235294, 0.388235, 0.509804, 1)
+
+[node name="Camera1" type="Camera2D" parent="Level1"]
+position = Vector2(332, 679)
+scale = Vector2(0.735294, 0.757576)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Level1UpsideDown" type="Node" parent="."]
+
+[node name="Background" type="Polygon2D" parent="Level1UpsideDown"]
+position = Vector2(5803, 196)
+color = Color(0.513726, 0.811765, 1, 0.666667)
+polygon = PackedVector2Array(-1845, 1022, -1766, -658, 2980, -743, 2856, 1322)
+
+[node name="Mirror" parent="Level1UpsideDown" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("1_x8n6r")]
+position = Vector2(5883.4, 194.008)
+rotation = -3.14159
+scale = Vector2(1.5, 1.5)
+mirror_to_go = NodePath("../../Level1/Mirror")
+camera_to_go = NodePath("../../Level1/Camera1")
+
+[node name="Polygon-structure" parent="Level1UpsideDown" instance=ExtResource("2_kqinp")]
+position = Vector2(5418, 1315)
+scale = Vector2(7.51447, 3.82192)
+color = Color(0.0235294, 0.388235, 0.509804, 1)
+
+[node name="Polygon-structure2" parent="Level1UpsideDown" instance=ExtResource("2_kqinp")]
+position = Vector2(6190.4, -503.992)
+scale = Vector2(8.6227, 7.04273)
+color = Color(0.0235294, 0.388235, 0.509804, 1)
+polygon = PackedVector2Array(-150, -47, 176, -47, 176, 2.56929, 176, 57, -150, 57)
+
+[node name="Camera2" type="Camera2D" parent="Level1UpsideDown"]
+position = Vector2(6207, 231)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." instance=ExtResource("1_yonv0")]
 z_index = 1
-position = Vector2(158.984, -119)
-collision_layer = 2
+position = Vector2(-539.016, 176)
+scale = Vector2(0.4, 0.4)
 collision_priority = 2.0

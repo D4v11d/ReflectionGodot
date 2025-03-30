@@ -1,25 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3f1y6oudbfxh"]
+[gd_scene load_steps=5 format=3 uid="uid://c3f1y6oudbfxh"]
 
 [ext_resource type="Script" path="res://scripts/mirror.gd" id="1_4x2lf"]
-[ext_resource type="Texture2D" uid="uid://bhyl27fkcwc1o" path="res://assets/Mirrors/blue-512.png" id="2_mq1sr"]
+[ext_resource type="Texture2D" uid="uid://cu0a4aenognbc" path="res://assets/Mirrors/Mirror Present - Light Blue.png" id="2_swamo"]
+[ext_resource type="Texture2D" uid="uid://c7a4a0locgpt" path="res://assets/Mirrors/Mirror Present - Light Blue Light.png" id="3_s4lox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4odfv"]
-size = Vector2(150, 195)
+size = Vector2(204, 291)
 
 [node name="Mirror" type="Node2D"]
-position = Vector2(521, -86)
+position = Vector2(518, -97)
 script = ExtResource("1_4x2lf")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(573, -364)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_mq1sr")
-
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-580, 356)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(573, -373.5)
+position = Vector2(574, -372.5)
 shape = SubResource("RectangleShape2D_4odfv")
+
+[node name="Mirror" type="Sprite2D" parent="."]
+position = Vector2(-7, -25)
+texture = ExtResource("2_swamo")
+
+[node name="MirrorLight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, -25)
+texture = ExtResource("3_s4lox")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

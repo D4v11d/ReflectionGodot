@@ -1,19 +1,96 @@
-[gd_scene load_steps=3 format=3 uid="uid://dt7f7rvuli7cp"]
+[gd_scene load_steps=15 format=3 uid="uid://dt7f7rvuli7cp"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rufih"]
+[ext_resource type="Texture2D" uid="uid://s3v0q121wuao" path="res://assets/Oni/oni_new.png" id="2_6sjav"]
+[ext_resource type="Texture2D" uid="uid://blp5aky0d1wqu" path="res://assets/OniDash/Oni_dash_sprite_1.png" id="2_udeps"]
+[ext_resource type="Texture2D" uid="uid://61xi43xiap18" path="res://assets/OniDash/Oni_dash_sprite_2.png" id="3_okqid"]
+[ext_resource type="Texture2D" uid="uid://bqg67kpy6bm3g" path="res://assets/OniDash/Oni_dash_sprite_3.png" id="4_2knml"]
+[ext_resource type="Texture2D" uid="uid://cln04gd5le3wd" path="res://assets/OniDash/Oni_dash_sprite_4.png" id="5_kme4b"]
+[ext_resource type="Texture2D" uid="uid://fhqdrn5u87sj" path="res://assets/OniDash/Oni_dash_sprite_5.png" id="6_vc8a1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_14p5r"]
-radius = 15.5153
+[sub_resource type="AtlasTexture" id="AtlasTexture_ys4xv"]
+atlas = ExtResource("2_udeps")
+region = Rect2(0, 0, 768, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vu5p"]
+atlas = ExtResource("3_okqid")
+region = Rect2(0, 0, 768, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt12r"]
+atlas = ExtResource("4_2knml")
+region = Rect2(0, 0, 768, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjme6"]
+atlas = ExtResource("5_kme4b")
+region = Rect2(0, 0, 768, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6p3i"]
+atlas = ExtResource("6_vc8a1")
+region = Rect2(0, 0, 768, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0jw6"]
+atlas = ExtResource("2_6sjav")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kornd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ys4xv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vu5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt12r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjme6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6p3i")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0jw6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(1.36, 1.32)
+position = Vector2(10, 13)
+scale = Vector2(1, 0.9)
 script = ExtResource("1_rufih")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(63.8571, -3.65625)
-scale = Vector2(1.11429, 1.15625)
-polygon = PackedVector2Array(-9, 17, -25, 49, 10, 49, -9, 17)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-257.714, -124.8)
+scale = Vector2(4.27712, 2.891)
+polygon = PackedVector2Array(31.7971, 68.7704, 79.8935, 68.7704, 83.5676, 57.7545, 59.3857, -1.52588e-05, 50.9689, -1.52588e-05, 26.787, 60.5085)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(55.147, 38.6364)
-shape = SubResource("CircleShape2D_14p5r")
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="DashAgainTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="AnimationTime" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Oni" type="AnimatedSprite2D" parent="."]
+position = Vector2(-26, -26.6667)
+sprite_frames = SubResource("SpriteFrames_kornd")
+animation = &"dash"
+autoplay = "idle"
+frame = 4
+frame_progress = 1.0
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashAgainTimer" to="." method="_on_dash_again_timer_timeout"]
+[connection signal="timeout" from="AnimationTime" to="." method="_on_animation_time_timeout"]
