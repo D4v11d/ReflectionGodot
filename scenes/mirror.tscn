@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3f1y6oudbfxh"]
+[gd_scene load_steps=8 format=3 uid="uid://c3f1y6oudbfxh"]
 
 [ext_resource type="Script" path="res://scripts/mirror.gd" id="1_4x2lf"]
 [ext_resource type="Texture2D" uid="uid://cu0a4aenognbc" path="res://assets/Mirrors/Mirror Present - Light Blue.png" id="2_swamo"]
 [ext_resource type="Texture2D" uid="uid://c7a4a0locgpt" path="res://assets/Mirrors/Mirror Present - Light Blue Light.png" id="3_s4lox"]
+[ext_resource type="Texture2D" uid="uid://s3v0q121wuao" path="res://assets/Oni/oni_new.png" id="4_nkoib"]
+[ext_resource type="Texture2D" uid="uid://1nfqc4urfj4o" path="res://assets/Mirrors/white.png" id="5_x8lr7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4odfv"]
 size = Vector2(204, 291)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_atv5i"]
+light_mode = 2
 
 [node name="Mirror" type="Node2D"]
 position = Vector2(518, -97)
@@ -26,6 +31,21 @@ texture = ExtResource("2_swamo")
 visible = false
 position = Vector2(-7, -25)
 texture = ExtResource("3_s4lox")
+
+[node name="Reflection" type="Sprite2D" parent="."]
+modulate = Color(0.545098, 1, 1, 0.717647)
+material = SubResource("CanvasItemMaterial_atv5i")
+position = Vector2(-183, -27)
+rotation = -3.13568
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_nkoib")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-5, 18)
+scale = Vector2(0.40625, 0.53125)
+blend_mode = 2
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("5_x8lr7")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

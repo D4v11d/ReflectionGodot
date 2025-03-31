@@ -4,10 +4,11 @@ class_name Player extends CharacterBody2D
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_again_timer: Timer = $DashAgainTimer
 @onready var animation_time: Timer = $AnimationTime
+@onready var warp_timer: Timer = $WarpTimer
 
-const SPEED = 400.0
+const SPEED = 500.0
 const JUMP_VELOCITY = -700.0
-const DASH_SPEED = 2500.0
+const DASH_SPEED = 3000.0
 
 var is_dashing = false
 var dash_available = true
@@ -20,7 +21,7 @@ var looking_direction = 1
 
 func _physics_process(delta: float) -> void:
 	
-	if is_on_floor():
+	if is_on_floor() or is_on_ceiling():
 		air_dash_available = true
 	# Add the gravity.
 	if not is_on_floor():
@@ -56,6 +57,10 @@ func swap_gravity() -> void:
 
 func handle_dash() -> void:
 	if Input.is_action_just_pressed("dash") and dash_available:
+		
+		if not is_on_floor() and not is_on_ceiling() and not air_dash_available:
+			return  # Exit if no air dash is available
+			
 		# start timers
 		dash_timer.start() # air time
 		animation_time.start() # animation time
@@ -64,11 +69,14 @@ func handle_dash() -> void:
 			
 		velocity.x = looking_direction * DASH_SPEED
 		is_dashing = true
-		pre_dash_gravity_direction = gravity_direction  # Save current gravity direction
-		if !is_on_floor() && !is_on_ceiling(): 
-			gravity_direction = 0  # Disable gravity during dash
+		pre_dash_gravity_direction = gravity_direction
 		velocity.y = 0
 		oni.play("dash")
+		
+		if not is_on_floor() and not is_on_ceiling(): 
+			gravity_direction = 0
+			air_dash_available = false
+		
 
 
 func _on_dash_timer_timeout() -> void:

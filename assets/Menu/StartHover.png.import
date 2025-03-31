@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d38efiglk30gg"
-path="res://.godot/imported/dash2.png-156386d0a66045ef4b6d7b1ea349ee89.ctex"
+uid="uid://uuclmprt6gv8"
+path="res://.godot/imported/StartHover.png-c7440c1e62c1d7e51f49f9c3ef0344b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Oni/dash2.png"
-dest_files=["res://.godot/imported/dash2.png-156386d0a66045ef4b6d7b1ea349ee89.ctex"]
+source_file="res://assets/Menu/StartHover.png"
+dest_files=["res://.godot/imported/StartHover.png-c7440c1e62c1d7e51f49f9c3ef0344b7.ctex"]
 
 [params]
 
