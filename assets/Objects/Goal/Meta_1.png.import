@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd2bodc0hnnl7"
-path="res://.godot/imported/ControlsHover.png-389b9e869a2abc85eb6c548a58f1d1c7.ctex"
+uid="uid://cov7tnwus5elb"
+path="res://.godot/imported/Meta_1.png-f1bb61cfac06524f7394cfc8a6567428.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Menu/ControlsHover.png"
-dest_files=["res://.godot/imported/ControlsHover.png-389b9e869a2abc85eb6c548a58f1d1c7.ctex"]
+source_file="res://assets/Objects/Goal/Meta_1.png"
+dest_files=["res://.godot/imported/Meta_1.png-f1bb61cfac06524f7394cfc8a6567428.ctex"]
 
 [params]
 

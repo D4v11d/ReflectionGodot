@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dt7f7rvuli7cp"]
+[gd_scene load_steps=16 format=3 uid="uid://dt7f7rvuli7cp"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rufih"]
 [ext_resource type="Texture2D" uid="uid://s3v0q121wuao" path="res://assets/Oni/oni_new.png" id="2_6sjav"]
@@ -7,10 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bqg67kpy6bm3g" path="res://assets/OniDash/Oni_dash_sprite_3.png" id="4_2knml"]
 [ext_resource type="Texture2D" uid="uid://cln04gd5le3wd" path="res://assets/OniDash/Oni_dash_sprite_4.png" id="5_kme4b"]
 [ext_resource type="Texture2D" uid="uid://fhqdrn5u87sj" path="res://assets/OniDash/Oni_dash_sprite_5.png" id="6_vc8a1"]
-[ext_resource type="Texture2D" uid="uid://bbvc040iot610" path="res://assets/OniShine/shine1.png" id="8_smw6b"]
-[ext_resource type="Texture2D" uid="uid://dfxpjja04awav" path="res://assets/OniShine/shine2.png" id="9_3rdck"]
-[ext_resource type="Texture2D" uid="uid://c5ixskkhi6v8t" path="res://assets/OniShine/shine3.png" id="10_y50yt"]
-[ext_resource type="Texture2D" uid="uid://jduxgrkvgnas" path="res://assets/OniShine/shine4.png" id="11_a7j6a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ys4xv"]
 atlas = ExtResource("2_udeps")
@@ -34,22 +30,6 @@ region = Rect2(0, 0, 768, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0jw6"]
 atlas = ExtResource("2_6sjav")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_un7ig"]
-atlas = ExtResource("8_smw6b")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n105e"]
-atlas = ExtResource("9_3rdck")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ckapw"]
-atlas = ExtResource("10_y50yt")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u4kq8"]
-atlas = ExtResource("11_a7j6a")
 region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kornd"]
@@ -81,23 +61,6 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_un7ig")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n105e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ckapw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u4kq8")
-}],
-"loop": false,
-"name": &"shine",
-"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nqoaj"]
@@ -127,7 +90,7 @@ one_shot = true
 [node name="Oni" type="AnimatedSprite2D" parent="."]
 position = Vector2(-26, -26.6667)
 sprite_frames = SubResource("SpriteFrames_kornd")
-animation = &"idle"
+animation = &"dash"
 autoplay = "idle"
 
 [node name="Area2D" type="Area2D" parent="."]

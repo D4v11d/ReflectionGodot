@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://buekjgej4gix5"]
+
+[ext_resource type="Texture2D" uid="uid://c6g0mjvovqboi" path="res://assets/Objects/Wood_box.png" id="1_kotbv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmmit"]
+size = Vector2(254, 254)
+
+[node name="Box" type="RigidBody2D" groups=["crates"]]
+position = Vector2(310, 43)
+lock_rotation = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("1_kotbv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_gmmit")

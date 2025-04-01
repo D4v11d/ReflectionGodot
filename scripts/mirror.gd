@@ -23,7 +23,6 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
-		game_manager.start_close_door()
 		print("Player entered area")
 		can_enter_mirror = true
 		mirror.visible = false
@@ -41,7 +40,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func handle_reflection() -> void:
 	var offset = 0
 	
-	if player.gravity_direction == 1:
+	if player.get_gravity_direction() == 1:
 		offset = 80
 	else:
 		offset = -80

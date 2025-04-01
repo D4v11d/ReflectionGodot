@@ -5,20 +5,20 @@ extends Node2D
 
 
 func _on_start_clickable_area_mouse_entered() -> void:
-	start.texture = load("res://assets/Menu/StartHover.png")
+	start.texture = load("res://assets/UI/StartHover.png")
 
 
 func _on_start_clickable_area_mouse_exited() -> void:
-	start.texture = load("res://assets/Menu/Start.png")
+	start.texture = load("res://assets/UI/Start.png")
 
 
 func _on_controls_clickable_area_mouse_entered() -> void:
-	controls.texture = load("res://assets/Menu/ControlsHover.png")
+	controls.texture = load("res://assets/UI/ControlsHover.png")
 
 
 
 func _on_controls_clickable_area_mouse_exited() -> void:
-	controls.texture = load("res://assets/Menu/Controls.png")
+	controls.texture = load("res://assets/UI/Controls.png")
 
 
 func _on_start_clickable_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

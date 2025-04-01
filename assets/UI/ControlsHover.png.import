@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gpaa7a78r17n"
-path="res://.godot/imported/StartScreen.png-878953783435bdb187b70b325caa1b5e.ctex"
+uid="uid://cd2bodc0hnnl7"
+path="res://.godot/imported/ControlsHover.png-ef9b715482f6af3e1be575c682ffc3e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Menu/StartScreen.png"
-dest_files=["res://.godot/imported/StartScreen.png-878953783435bdb187b70b325caa1b5e.ctex"]
+source_file="res://assets/UI/ControlsHover.png"
+dest_files=["res://.godot/imported/ControlsHover.png-ef9b715482f6af3e1be575c682ffc3e4.ctex"]
 
 [params]
 

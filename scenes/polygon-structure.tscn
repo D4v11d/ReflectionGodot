@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsgfhokq3q6ya"]
+[gd_scene load_steps=3 format=3 uid="uid://dsgfhokq3q6ya"]
 
 [ext_resource type="Script" path="res://scripts/polygon_structure.gd" id="1_6o2tf"]
+[ext_resource type="Texture2D" uid="uid://cldyfrqp6buka" path="res://assets/Textures/Block Wall.png" id="1_34kxq"]
 
 [node name="Polygon-structure" type="Polygon2D"]
-polygon = PackedVector2Array(-150, -47, 176, -47, 176, 57, -150, 57)
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-2072.29, -1830.82)
+scale = Vector2(0.968666, 0.750771)
+texture = ExtResource("1_34kxq")
+polygon = PackedVector2Array(517.503, -233.342, 505.17, 674.108, -849.846, 681.727, -852.615, -236.448)
 script = ExtResource("1_6o2tf")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

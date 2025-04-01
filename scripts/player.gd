@@ -5,19 +5,24 @@ class_name Player extends CharacterBody2D
 @onready var dash_again_timer: Timer = $DashAgainTimer
 @onready var animation_time: Timer = $AnimationTime
 @onready var warp_timer: Timer = $WarpTimer
+@onready var camera_1: Camera2D = $"../Level1/Camera1"
 
-const SPEED = 500.0
-const JUMP_VELOCITY = -700.0
-const DASH_SPEED = 3000.0
+const SPEED = 700.0
+const JUMP_VELOCITY = -1200.0
+const DASH_SPEED = 4000.0
+
+# For crate push
+const MAX_VELOCITY = 150.0
+const PUSH_FORCE = 100.0
 
 var is_dashing = false
 var dash_available = true
 var air_dash_available = true
 
-var gravity_direction = 1
-var pre_dash_gravity_direction = 1
 var looking_direction = 1
 
+func _ready() -> void:
+	oni.flip_h = true
 
 func _physics_process(delta: float) -> void:
 	
@@ -25,11 +30,11 @@ func _physics_process(delta: float) -> void:
 		air_dash_available = true
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * 2 * delta * gravity_direction
+		velocity += get_gravity() * 2.5 * delta * get_gravity_direction()
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or is_on_ceiling()):
-			velocity.y = JUMP_VELOCITY * gravity_direction
+			velocity.y = JUMP_VELOCITY * get_gravity_direction()
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("move_left", "move_right")
@@ -46,13 +51,11 @@ func _physics_process(delta: float) -> void:
 	
 	# Dash	
 	handle_dash()
+	
+	# Push Crates
+	handle_push_crate()
 
 	move_and_slide()
-
-
-func swap_gravity() -> void:
-	gravity_direction *= -1
-	pre_dash_gravity_direction = gravity_direction
 
 
 func handle_dash() -> void:
@@ -69,18 +72,23 @@ func handle_dash() -> void:
 			
 		velocity.x = looking_direction * DASH_SPEED
 		is_dashing = true
-		pre_dash_gravity_direction = gravity_direction
 		velocity.y = 0
 		oni.play("dash")
 		
 		if not is_on_floor() and not is_on_ceiling(): 
-			gravity_direction = 0
 			air_dash_available = false
+
+
+func handle_push_crate() -> void:
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var crate = collision.get_collider()
 		
+		if crate.is_in_group("crates") and abs(crate.get_linear_velocity().x) < MAX_VELOCITY:
+			crate.apply_central_impulse(collision.get_normal() * - PUSH_FORCE)
 
 
 func _on_dash_timer_timeout() -> void:
-	gravity_direction = pre_dash_gravity_direction  # Restore pre-dash gravity direction
 	velocity.x = move_toward(velocity.x, 0, SPEED)
 	is_dashing = false
 
@@ -92,3 +100,10 @@ func _on_animation_time_timeout() -> void:
 
 func _on_dash_again_timer_timeout() -> void:
 	dash_available = true
+	
+	
+func get_gravity_direction() -> float:
+	if is_dashing:
+		return 0.0
+	else:
+		return 1.0 if camera_1.is_current() else -1.0
