@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://cvftj38pfi5ju"]
+[gd_scene load_steps=22 format=3 uid="uid://cvftj38pfi5ju"]
 
 [ext_resource type="Texture2D" uid="uid://cov7tnwus5elb" path="res://assets/Objects/Goal/Meta_1.png" id="1_i52g8"]
+[ext_resource type="Script" path="res://scripts/goal.gd" id="1_ixh6j"]
 [ext_resource type="Texture2D" uid="uid://caymqldj57mkq" path="res://assets/Objects/Goal/Meta_2.png" id="2_opx7x"]
 [ext_resource type="Texture2D" uid="uid://c0qspftde5veb" path="res://assets/Objects/Goal/Meta_3.png" id="3_rgtov"]
 [ext_resource type="Texture2D" uid="uid://ks8jljucl85f" path="res://assets/Objects/Goal/Meta_4.png" id="4_d2r1l"]
@@ -85,6 +86,7 @@ animations = [{
 radius = 121.334
 
 [node name="Goal" type="Area2D"]
+script = ExtResource("1_ixh6j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_je71d")

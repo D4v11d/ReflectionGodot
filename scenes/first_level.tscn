@@ -1,114 +1,162 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl04jw2r2acuu"]
+[gd_scene load_steps=11 format=3 uid="uid://dl04jw2r2acuu"]
 
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_akln2"]
 [ext_resource type="PackedScene" uid="uid://c3f1y6oudbfxh" path="res://scenes/mirror.tscn" id="2_6t3x0"]
 [ext_resource type="PackedScene" uid="uid://dsgfhokq3q6ya" path="res://scenes/polygon-structure.tscn" id="3_xhj36"]
 [ext_resource type="Texture2D" uid="uid://1nfqc4urfj4o" path="res://assets/Mirrors/white.png" id="4_trhsd"]
-[ext_resource type="PackedScene" uid="uid://4q24d4tsuhqr" path="res://scenes/killzone.tscn" id="4_wh2p5"]
 [ext_resource type="PackedScene" uid="uid://dt7f7rvuli7cp" path="res://scenes/player.tscn" id="5_7rkbp"]
+[ext_resource type="PackedScene" uid="uid://dt0inerao2r1t" path="res://scenes/Label.tscn" id="5_ow766"]
+[ext_resource type="PackedScene" uid="uid://4q24d4tsuhqr" path="res://scenes/killzone.tscn" id="6_ch85s"]
+[ext_resource type="PackedScene" uid="uid://ongrs282e7xw" path="res://scenes/platform.tscn" id="6_lwxmr"]
 [ext_resource type="PackedScene" uid="uid://cvftj38pfi5ju" path="res://scenes/goal.tscn" id="7_k7w75"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_l5l5n"]
-a = Vector2(-157, 7)
-b = Vector2(467, 11)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_squxe"]
+size = Vector2(552, 761)
 
-[node name="FirstLevel" type="Node"]
+[node name="Level1" type="Node"]
 
 [node name="GameManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_akln2")
 
-[node name="Level1" type="Node" parent="."]
+[node name="Scenario" type="Node" parent="."]
 
-[node name="Background" type="Polygon2D" parent="Level1"]
+[node name="Background" type="Polygon2D" parent="Scenario"]
 position = Vector2(118.218, 601.831)
 scale = Vector2(1.08684, 1.42373)
 color = Color(0.513726, 0.811765, 1, 0.666667)
 polygon = PackedVector2Array(-1845, 1022, -1766, -658, 2980, -743, 2856, 1322)
 
-[node name="Mirror" parent="Level1" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("2_6t3x0")]
+[node name="Mirror" parent="Scenario" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("2_6t3x0")]
 position = Vector2(-867, 1151)
 scale = Vector2(1.5, 1.485)
-mirror_to_go = NodePath("../../Level1UpsideDown/Mirror")
-camera_to_go = NodePath("../../Level1UpsideDown/Camera2")
+mirror_to_go = NodePath("../../MirrorWorld/Mirror")
+camera_to_go = NodePath("../../MirrorWorld/Camera2")
 
-[node name="Camera1" type="Camera2D" parent="Level1"]
-visible = false
-position = Vector2(332, 679)
+[node name="Camera1" type="Camera2D" parent="Scenario"]
+position = Vector2(304, 643)
 scale = Vector2(0.735294, 0.757576)
 zoom = Vector2(0.3, 0.3)
 
-[node name="Ceiling" parent="Level1" instance=ExtResource("3_xhj36")]
+[node name="Ceiling" parent="Scenario" instance=ExtResource("3_xhj36")]
 position = Vector2(-1326, -552)
-polygon = PackedVector2Array(4625.95, -165.163, 4626.98, 756.555, -859.945, 760.551, -852.615, -236.448)
+polygon = PackedVector2Array(4625.95, -165.163, 4619.76, 1910.04, 3673.09, 1875.41, 3673.09, 745.9, -859.945, 760.551, -852.615, -236.448)
 
-[node name="Floor1" parent="Level1" instance=ExtResource("3_xhj36")]
+[node name="Floor1" parent="Scenario" instance=ExtResource("3_xhj36")]
 position = Vector2(-1454, 1437)
 scale = Vector2(0.938314, 0.563658)
-polygon = PackedVector2Array(1206.42, -257.248, 1207.48, 773.52, -859.945, 760.551, -869.644, -259.022)
+polygon = PackedVector2Array(1206.42, -257.248, 1207.48, 773.52, -859.945, 760.551, -886.697, -2602.64, -290.947, -2565.39, -313.328, -264.345)
 
-[node name="Line2D" type="Line2D" parent="Level1/Floor1"]
+[node name="Line2D" type="Line2D" parent="Scenario/Floor1"]
 points = PackedVector2Array(1208.55, 771.745, 1207.48, -251.925, 1181.91, -251.925)
 default_color = Color(0.121569, 0.172549, 0.309804, 1)
 joint_mode = 2
 
-[node name="Floor2" parent="Level1" instance=ExtResource("3_xhj36")]
-position = Vector2(1861, 1319)
-polygon = PackedVector2Array(524.432, -760.551, 505.17, 674.108, -858.913, 683.297, -858.913, -759.219)
+[node name="Floor2" parent="Scenario" instance=ExtResource("3_xhj36")]
+position = Vector2(1628, 1314)
+polygon = PackedVector2Array(918.789, -753.892, 916.725, 681.965, -858.913, 683.297, -858.913, -759.219)
 
-[node name="Line2D" type="Line2D" parent="Level1/Floor2"]
+[node name="Line2D" type="Line2D" parent="Scenario/Floor2"]
 points = PackedVector2Array(-862.01, 680.634, -862.01, -753.891, -837.234, -753.891)
 default_color = Color(0.121569, 0.172549, 0.309804, 1)
 joint_mode = 2
 end_cap_mode = 2
 
-[node name="Mirror2" parent="Level1" instance=ExtResource("2_6t3x0")]
-position = Vector2(1327, 596)
+[node name="Mirror2" parent="Scenario" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("2_6t3x0")]
+position = Vector2(1079, 586)
 scale = Vector2(1.5, 1.5)
+mirror_to_go = NodePath("../../MirrorWorld/Mirror2")
+camera_to_go = NodePath("../../MirrorWorld/Camera2")
 
-[node name="Polygon2D" type="Polygon2D" parent="Level1"]
+[node name="How to move" parent="Scenario" instance=ExtResource("5_ow766")]
+offset_left = -1617.0
+offset_top = 233.0
+offset_right = -386.0
+offset_bottom = 492.0
+text = "Use WASD or arrow keys
+to move"
+
+[node name="Enter Mirror World" parent="Scenario" instance=ExtResource("5_ow766")]
+offset_left = -458.0
+offset_top = 968.0
+offset_right = 840.0
+offset_bottom = 1228.0
+text = "Press E or K to enter
+the Mirror World"
+
+[node name="Killzone" parent="Scenario" instance=ExtResource("6_ch85s")]
+position = Vector2(9520, -4)
+scale = Vector2(1.84414, 1)
+
+[node name="Good Luck!" parent="Scenario" instance=ExtResource("5_ow766")]
 visible = false
-position = Vector2(203, -4)
-color = Color(1, 1, 0.572549, 1)
-polygon = PackedVector2Array(1827, 407, 1961, 527, 1855, 645, 1717, 546)
+offset_left = -496.0
+offset_top = 192.0
+offset_right = 802.0
+offset_bottom = 452.0
+text = "Good Luck!"
 
-[node name="PointLight2D" type="PointLight2D" parent="Level1/Polygon2D"]
-position = Vector2(1835, 525)
-color = Color(1, 1, 0.447059, 1)
-texture = ExtResource("4_trhsd")
-texture_scale = 5.0
+[node name="ShowGoodLuck!" type="Area2D" parent="Scenario"]
 
-[node name="Level1UpsideDown" type="Node" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenario/ShowGoodLuck!"]
+position = Vector2(1068, 396.5)
+shape = SubResource("RectangleShape2D_squxe")
 
-[node name="Polygon2D" type="Polygon2D" parent="Level1UpsideDown"]
-position = Vector2(394.369, 11.0037)
-scale = Vector2(0.939597, 1.01119)
-color = Color(0.826293, 0, 0.11184, 1)
-polygon = PackedVector2Array(6558, -981, 7070.72, -980.033, 7125, -715, 6529, -719)
+[node name="MirrorWorld" type="Node" parent="."]
 
-[node name="Background" type="Polygon2D" parent="Level1UpsideDown"]
-position = Vector2(6060.76, -340)
-scale = Vector2(1.14404, 1)
+[node name="Background" type="Polygon2D" parent="MirrorWorld"]
+position = Vector2(9312, 628)
+scale = Vector2(1.14404, 1.20726)
 color = Color(0.513726, 0.811765, 1, 0.666667)
 polygon = PackedVector2Array(-1845, 1022, -1766, -658, 2980, -743, 2856, 1322)
 
-[node name="Mirror" parent="Level1UpsideDown" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("2_6t3x0")]
-position = Vector2(6472, -452)
+[node name="Mirror" parent="MirrorWorld" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("2_6t3x0")]
+position = Vector2(7982, 880.518)
 rotation = -3.14159
 scale = Vector2(1.5, 1.5)
-mirror_to_go = NodePath("../../Level1/Mirror")
-camera_to_go = NodePath("../../Level1/Camera1")
+mirror_to_go = NodePath("../../Scenario/Mirror")
+camera_to_go = NodePath("../../Scenario/Camera1")
 
-[node name="Camera2" type="Camera2D" parent="Level1UpsideDown"]
-position = Vector2(6410, -239)
-zoom = Vector2(0.4, 0.4)
+[node name="Camera2" type="Camera2D" parent="MirrorWorld"]
+position = Vector2(9319, 1039)
+zoom = Vector2(0.3, 0.3)
 
-[node name="Killzone" parent="Level1UpsideDown" instance=ExtResource("4_wh2p5")]
-position = Vector2(6588, -407)
+[node name="Mirror2" parent="MirrorWorld" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("2_6t3x0")]
+position = Vector2(10797, 872)
+rotation = 3.14159
+scale = Vector2(1.5, 1.5)
+mirror_to_go = NodePath("../../Scenario/Mirror2")
+camera_to_go = NodePath("../../Scenario/Camera1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1UpsideDown/Killzone"]
-position = Vector2(70, -299)
-shape = SubResource("SegmentShape2D_l5l5n")
+[node name="Floor1" parent="MirrorWorld" instance=ExtResource("3_xhj36")]
+position = Vector2(6909, 122)
+polygon = PackedVector2Array(1664.14, -235.758, 1664.14, 756.556, 556.436, 747.232, -852.719, 755.224, -852.615, -236.448)
+
+[node name="Platform" parent="MirrorWorld" instance=ExtResource("6_lwxmr")]
+position = Vector2(9498, 519)
+
+[node name="Floor2" parent="MirrorWorld" instance=ExtResource("3_xhj36")]
+position = Vector2(11368, 106)
+polygon = PackedVector2Array(517.503, -233.342, 508.947, 2207.06, -260.152, 2205.73, -259.12, 757.888, -855.816, 756.556, -855.816, -235.758)
+
+[node name="Roof" parent="MirrorWorld" instance=ExtResource("3_xhj36")]
+position = Vector2(8127, 1952)
+polygon = PackedVector2Array(3800.07, -254.405, 3801.1, 828.482, -849.846, 681.727, -852.719, -254.405)
+
+[node name="Killzone" parent="MirrorWorld" instance=ExtResource("6_ch85s")]
+position = Vector2(178, 1733)
+
+[node name="RightWall" parent="MirrorWorld" instance=ExtResource("3_xhj36")]
+position = Vector2(7153, 868)
+polygon = PackedVector2Array(507.915, -258.401, 506.882, 1189.44, -851.687, 1188.11, -852.719, -259.733)
+
+[node name="Jump and dash" parent="MirrorWorld" instance=ExtResource("5_ow766")]
+offset_left = 8847.0
+offset_top = 1176.0
+offset_right = 10145.0
+offset_bottom = 1436.0
+text = "Press space to jump and 
+J or Left Shift to dash"
 
 [node name="Player" parent="." instance=ExtResource("5_7rkbp")]
 z_index = 1
@@ -123,4 +171,7 @@ position = Vector2(1935, 521)
 position = Vector2(35, 9.99997)
 scale = Vector2(4.4375, 4.17188)
 energy = 0.2
+shadow_color = Color(0, 0, 0, 0.686275)
 texture = ExtResource("4_trhsd")
+
+[connection signal="body_entered" from="Scenario/ShowGoodLuck!" to="GameManager" method="_on_show_good_luck_body_entered"]

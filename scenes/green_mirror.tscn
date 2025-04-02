@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnrskpke7pu6x"]
+
+[ext_resource type="Script" path="res://scripts/mirror.gd" id="1_aypkl"]
+[ext_resource type="Texture2D" uid="uid://12h44q0bra1o" path="res://assets/Mirrors/BluePast.png" id="2_xgrem"]
+[ext_resource type="Texture2D" uid="uid://bqy2kchckdtp4" path="res://assets/Mirrors/BluePastLight.png" id="3_nitle"]
+[ext_resource type="Texture2D" uid="uid://s3v0q121wuao" path="res://assets/Oni/oni_new.png" id="4_hwlus"]
+[ext_resource type="Texture2D" uid="uid://1nfqc4urfj4o" path="res://assets/Mirrors/white.png" id="5_3p6hc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4odfv"]
+size = Vector2(204, 291)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_atv5i"]
+light_mode = 2
+
+[node name="GreenMirror" type="Node2D"]
+position = Vector2(518, -97)
+script = ExtResource("1_aypkl")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-580, 356)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(574, -372.5)
+shape = SubResource("RectangleShape2D_4odfv")
+
+[node name="Mirror" type="Sprite2D" parent="."]
+position = Vector2(-6, -14)
+texture = ExtResource("2_xgrem")
+
+[node name="MirrorLight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, -14)
+texture = ExtResource("3_nitle")
+
+[node name="Reflection" type="Sprite2D" parent="."]
+modulate = Color(0.545098, 1, 1, 0.717647)
+material = SubResource("CanvasItemMaterial_atv5i")
+position = Vector2(-120, -23)
+rotation = -3.13568
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_hwlus")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-5, 24)
+scale = Vector2(0.390625, 0.503906)
+blend_mode = 2
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("5_3p6hc")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

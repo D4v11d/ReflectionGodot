@@ -1,0 +1,113 @@
+[gd_scene load_steps=10 format=3 uid="uid://d01rjswiigs5x"]
+
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_nbk3w"]
+[ext_resource type="PackedScene" uid="uid://c3f1y6oudbfxh" path="res://scenes/mirror.tscn" id="2_6c4y7"]
+[ext_resource type="Texture2D" uid="uid://jtm2qfffhfqr" path="res://assets/Mirrors/YellowPast.png" id="3_6ckob"]
+[ext_resource type="PackedScene" uid="uid://dsgfhokq3q6ya" path="res://scenes/polygon-structure.tscn" id="3_eo3iy"]
+[ext_resource type="Texture2D" uid="uid://dnh5k7nej1lt2" path="res://assets/Mirrors/YellowPastLight.png" id="4_11gbp"]
+[ext_resource type="PackedScene" uid="uid://ongrs282e7xw" path="res://scenes/platform.tscn" id="5_pblbk"]
+[ext_resource type="PackedScene" uid="uid://buekjgej4gix5" path="res://scenes/box.tscn" id="5_smnor"]
+[ext_resource type="PackedScene" uid="uid://dt7f7rvuli7cp" path="res://scenes/player.tscn" id="6_mf1fn"]
+[ext_resource type="PackedScene" uid="uid://cvftj38pfi5ju" path="res://scenes/goal.tscn" id="7_o77uw"]
+
+[node name="Level2" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_nbk3w")
+
+[node name="Scenario" type="Node" parent="."]
+
+[node name="Background" type="Polygon2D" parent="Scenario"]
+z_index = -1
+position = Vector2(144, 600)
+scale = Vector2(1.08684, 1.42373)
+color = Color(0.921569, 0.988235, 0.647059, 0.729412)
+polygon = PackedVector2Array(-1845, 1022, -1766, -658, 2980, -743, 2856, 1322)
+
+[node name="Mirror" parent="Scenario" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("2_6c4y7")]
+position = Vector2(216, 1496)
+scale = Vector2(1.5, 1.485)
+mirror_texture = ExtResource("3_6ckob")
+mirror_light_texture = ExtResource("4_11gbp")
+reflection_color = Color(0.905882, 0.980392, 0.380392, 0.796078)
+mirror_to_go = NodePath("../../MirrorWorld/Mirror")
+camera_to_go = NodePath("../../MirrorWorld/Camera2")
+
+[node name="Camera1" type="Camera2D" parent="Scenario"]
+position = Vector2(304, 643)
+scale = Vector2(0.735294, 0.757576)
+zoom = Vector2(0.3, 0.3)
+
+[node name="Ceiling" parent="Scenario" instance=ExtResource("3_eo3iy")]
+position = Vector2(-1104, -904)
+polygon = PackedVector2Array(4625.95, -165.163, 4666.21, 3345.89, 3476.95, 2791.8, 3468.69, 1385.24, -726.773, 1385.24, -852.615, -236.448)
+
+[node name="Floor1" parent="Scenario" instance=ExtResource("3_eo3iy")]
+position = Vector2(-1454, 1437)
+scale = Vector2(0.938314, 0.563658)
+polygon = PackedVector2Array(509.424, -633.363, 509.424, -136.608, 1003.93, -136.608, 1003.93, 374.34, 2743.22, 374.34, 2743.22, -505.626, 4499.56, -505.626, 4525.14, 785.938, 1003.93, 757.552, -859.945, 760.551, -880.302, -3159.72, -274.961, -3145.52, -274.961, -633.363)
+
+[node name="MirrorWorld" type="Node" parent="."]
+
+[node name="Background" type="Polygon2D" parent="MirrorWorld"]
+z_index = -1
+position = Vector2(9328, 576)
+scale = Vector2(1.14404, 1.20726)
+color = Color(0.921569, 0.988235, 0.647059, 0.729412)
+polygon = PackedVector2Array(-2342.58, 1620.2, -2356.56, -1056.94, 3657.21, -878.021, 3314.57, 1865.38)
+
+[node name="Mirror" parent="MirrorWorld" node_paths=PackedStringArray("mirror_to_go", "camera_to_go") instance=ExtResource("2_6c4y7")]
+position = Vector2(9168, 232)
+rotation = -3.14159
+scale = Vector2(1.5, 1.5)
+mirror_texture = ExtResource("3_6ckob")
+mirror_light_texture = ExtResource("4_11gbp")
+reflection_color = Color(0.905882, 0.980392, 0.380392, 0.745098)
+mirror_to_go = NodePath("../../Scenario/Mirror")
+camera_to_go = NodePath("../../Scenario/Camera1")
+
+[node name="Camera2" type="Camera2D" parent="MirrorWorld"]
+position = Vector2(9319, 1039)
+zoom = Vector2(0.3, 0.3)
+
+[node name="Platform" parent="MirrorWorld" instance=ExtResource("5_pblbk")]
+position = Vector2(9840, 715)
+
+[node name="Platform2" parent="MirrorWorld" instance=ExtResource("5_pblbk")]
+position = Vector2(8992, 715)
+
+[node name="Floor1" parent="MirrorWorld" instance=ExtResource("3_eo3iy")]
+position = Vector2(10944, 296)
+scale = Vector2(-0.938, -0.564)
+polygon = PackedVector2Array(631.13, -397.163, 631.13, -14.1844, 1006.4, -14.1844, 1006.4, 368.794, 2533.11, 368.794, 2643.92, 226.95, 2737.74, 98.2971, 2737.74, -1007.09, 3641.79, -1007.09, 3641.79, -3290.78, 4545.84, -3304.96, 4525.14, 785.938, 1003.93, 757.552, -859.945, 760.551, -880.302, -3159.72, -238.807, -3134.75, -238.807, -765.957, 255.863, -765.957, 255.863, -397.163)
+
+[node name="Ceiling" parent="MirrorWorld" instance=ExtResource("3_eo3iy")]
+position = Vector2(7440, 1824)
+polygon = PackedVector2Array(3964.21, -255.737, 3964.21, 681.966, -849.846, 681.727, -850.655, -255.737)
+
+[node name="BlockFixer" parent="MirrorWorld" instance=ExtResource("3_eo3iy")]
+position = Vector2(7960, 1064)
+polygon = PackedVector2Array(8.25879, -10.6556, 8.25879, 255.737, -132.14, 255.737, -132.14, -10.6558)
+
+[node name="Box" parent="." node_paths=PackedStringArray("other_world_box") instance=ExtResource("5_smnor")]
+z_index = 1
+position = Vector2(1344, 592)
+mass = 0.9
+gravity_scale = 1.5
+other_world_box = NodePath("../Box2")
+
+[node name="Box2" parent="." instance=ExtResource("5_smnor")]
+z_index = 1
+position = Vector2(8104, 1000)
+mass = 0.9
+gravity_scale = -1.5
+
+[node name="Player" parent="." instance=ExtResource("6_mf1fn")]
+z_index = 1
+position = Vector2(-1408, 992)
+scale = Vector2(0.5, 0.5)
+collision_priority = 2.0
+
+[node name="Goal" parent="." instance=ExtResource("7_o77uw")]
+position = Vector2(1904, 952)

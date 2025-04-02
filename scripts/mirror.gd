@@ -1,16 +1,28 @@
 class_name Mirror extends Node2D
 
 @onready var game_manager: GameManager = %GameManager
-@onready var mirror_light: Sprite2D = $MirrorLight
-@onready var mirror: Sprite2D = $Mirror
 @onready var player: Player = $"../../Player"
-
 @onready var reflection: Sprite2D = $Reflection
+@onready var mirror: Sprite2D = $Mirror
+@onready var mirror_light: Sprite2D = $MirrorLight
 
+@export var mirror_texture: Texture2D
+@export var mirror_light_texture: Texture2D
+@export var reflection_color: Color
 @export var mirror_to_go: Mirror
 @export var camera_to_go: Camera2D
 
 var can_enter_mirror = false
+
+func _ready() -> void:
+	
+	# set sprites from editor or use current
+	if mirror_texture and mirror_light_texture:
+		mirror.texture = mirror_texture
+		mirror_light.texture = mirror_light_texture
+	
+	if reflection_color:
+		reflection.modulate = reflection_color
 
 # Called every frame. 'delta' is the elapsed time sinc the previous frame.
 func _process(delta: float) -> void:

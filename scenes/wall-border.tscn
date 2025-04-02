@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ccarokgs0gasg"]
+
+[node name="Line2D" type="Line2D"]
+points = PackedVector2Array(1208.55, 771.745, 1207.48, -251.925, 1181.91, -251.925)
+default_color = Color(0.121569, 0.172549, 0.309804, 1)
+joint_mode = 2

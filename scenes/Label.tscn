@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt0inerao2r1t"]
+
+[ext_resource type="FontFile" uid="uid://byda8nqhkjrpx" path="res://assets/MedodicaRegular.otf" id="1_kch7u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5toqi"]
+font = ExtResource("1_kch7u")
+font_size = 128
+font_color = Color(0.188235, 0, 0.282353, 1)
+
+[node name="Label" type="Label"]
+offset_left = -1854.0
+offset_top = 238.0
+offset_right = -556.0
+offset_bottom = 498.0
+text = "Test Label"
+label_settings = SubResource("LabelSettings_5toqi")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

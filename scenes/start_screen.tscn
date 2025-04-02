@@ -1,15 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dggrebq68uesn"]
+[gd_scene load_steps=12 format=3 uid="uid://dggrebq68uesn"]
 
 [ext_resource type="Script" path="res://scripts/start_screen.gd" id="1_1ip85"]
 [ext_resource type="Texture2D" uid="uid://gpaa7a78r17n" path="res://assets/UI/StartScreen.png" id="2_i2wbu"]
 [ext_resource type="Texture2D" uid="uid://svdekfruhxeo" path="res://assets/UI/Start.png" id="3_0gx7r"]
 [ext_resource type="Texture2D" uid="uid://cmmwl54j2rl04" path="res://assets/UI/Controls.png" id="4_rdrot"]
+[ext_resource type="Texture2D" uid="uid://bq3ep0qb77r7o" path="res://assets/UI/Controls_screen.png" id="5_ytoke"]
+[ext_resource type="Texture2D" uid="uid://xxtplb5iybim" path="res://assets/UI/Buttons/Back.png" id="6_2ulol"]
+[ext_resource type="AudioStream" uid="uid://dqwu6qryi0fgi" path="res://assets/Music/Main_Screen_Song_2.wav" id="7_d6kow"]
+[ext_resource type="AudioStream" uid="uid://dbweqjg6r15kw" path="res://assets/Music/SFX/click.wav" id="8_n3j2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wd44v"]
 size = Vector2(581, 271)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjuep"]
 size = Vector2(437, 280)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hq4vh"]
+size = Vector2(401.963, 190.947)
 
 [node name="StartScreen" type="Node2D"]
 script = ExtResource("1_1ip85")
@@ -18,28 +25,59 @@ script = ExtResource("1_1ip85")
 position = Vector2(130, 138)
 texture = ExtResource("2_i2wbu")
 
-[node name="Start" type="Sprite2D" parent="."]
-position = Vector2(-267, 403)
+[node name="Start" type="Sprite2D" parent="StartScreen"]
+position = Vector2(-397, 265)
 texture = ExtResource("3_0gx7r")
 
-[node name="StartClickableArea" type="Area2D" parent="Start"]
+[node name="StartClickableArea" type="Area2D" parent="StartScreen/Start"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Start/StartClickableArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartScreen/Start/StartClickableArea"]
 position = Vector2(14.5, -12.5)
 shape = SubResource("RectangleShape2D_wd44v")
 
-[node name="Controls" type="Sprite2D" parent="."]
-position = Vector2(441, 747)
+[node name="Controls" type="Sprite2D" parent="StartScreen"]
+position = Vector2(311, 609)
 texture = ExtResource("4_rdrot")
 
-[node name="ControlsClickableArea" type="Area2D" parent="Controls"]
+[node name="ControlsClickableArea" type="Area2D" parent="StartScreen/Controls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Controls/ControlsClickableArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartScreen/Controls/ControlsClickableArea"]
 shape = SubResource("RectangleShape2D_tjuep")
 
-[connection signal="input_event" from="Start/StartClickableArea" to="." method="_on_start_clickable_area_input_event"]
-[connection signal="mouse_entered" from="Start/StartClickableArea" to="." method="_on_start_clickable_area_mouse_entered"]
-[connection signal="mouse_exited" from="Start/StartClickableArea" to="." method="_on_start_clickable_area_mouse_exited"]
-[connection signal="input_event" from="Controls/ControlsClickableArea" to="." method="_on_controls_clickable_area_input_event"]
-[connection signal="mouse_entered" from="Controls/ControlsClickableArea" to="." method="_on_controls_clickable_area_mouse_entered"]
-[connection signal="mouse_exited" from="Controls/ControlsClickableArea" to="." method="_on_controls_clickable_area_mouse_exited"]
+[node name="ControlsScreen" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(130, 138)
+scale = Vector2(1, 1)
+texture = ExtResource("5_ytoke")
+
+[node name="Back" type="Sprite2D" parent="ControlsScreen"]
+position = Vector2(0, 786.252)
+scale = Vector2(1.17533, 1.24802)
+texture = ExtResource("6_2ulol")
+
+[node name="BackClickableArea" type="Area2D" parent="ControlsScreen/Back"]
+position = Vector2(0, -630)
+scale = Vector2(0.850824, 0.80127)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ControlsScreen/Back/BackClickableArea"]
+position = Vector2(-1.17532, 776.892)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_hq4vh")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_d6kow")
+volume_db = 5.0
+autoplay = true
+
+[node name="ClickSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_n3j2x")
+
+[connection signal="input_event" from="StartScreen/Start/StartClickableArea" to="." method="_on_start_clickable_area_input_event"]
+[connection signal="mouse_entered" from="StartScreen/Start/StartClickableArea" to="." method="_on_start_clickable_area_mouse_entered"]
+[connection signal="mouse_exited" from="StartScreen/Start/StartClickableArea" to="." method="_on_start_clickable_area_mouse_exited"]
+[connection signal="input_event" from="StartScreen/Controls/ControlsClickableArea" to="." method="_on_controls_clickable_area_input_event"]
+[connection signal="mouse_entered" from="StartScreen/Controls/ControlsClickableArea" to="." method="_on_controls_clickable_area_mouse_entered"]
+[connection signal="mouse_exited" from="StartScreen/Controls/ControlsClickableArea" to="." method="_on_controls_clickable_area_mouse_exited"]
+[connection signal="input_event" from="ControlsScreen/Back/BackClickableArea" to="." method="_on_back_clickable_area_input_event"]
+[connection signal="mouse_entered" from="ControlsScreen/Back/BackClickableArea" to="." method="_on_back_clickable_area_mouse_entered"]
+[connection signal="mouse_exited" from="ControlsScreen/Back/BackClickableArea" to="." method="_on_back_clickable_area_mouse_exited"]

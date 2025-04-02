@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dt7f7rvuli7cp"]
+[gd_scene load_steps=17 format=3 uid="uid://dt7f7rvuli7cp"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rufih"]
 [ext_resource type="Texture2D" uid="uid://s3v0q121wuao" path="res://assets/Oni/oni_new.png" id="2_6sjav"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bqg67kpy6bm3g" path="res://assets/OniDash/Oni_dash_sprite_3.png" id="4_2knml"]
 [ext_resource type="Texture2D" uid="uid://cln04gd5le3wd" path="res://assets/OniDash/Oni_dash_sprite_4.png" id="5_kme4b"]
 [ext_resource type="Texture2D" uid="uid://fhqdrn5u87sj" path="res://assets/OniDash/Oni_dash_sprite_5.png" id="6_vc8a1"]
+[ext_resource type="AudioStream" uid="uid://m1t2lta7wgxf" path="res://assets/Music/SFX/dash.wav" id="8_tti3t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ys4xv"]
 atlas = ExtResource("2_udeps")
@@ -99,6 +100,9 @@ autoplay = "idle"
 position = Vector2(-27, -65.5556)
 scale = Vector2(1.47243, 0.838228)
 shape = SubResource("CapsuleShape2D_nqoaj")
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_tti3t")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashAgainTimer" to="." method="_on_dash_again_timer_timeout"]

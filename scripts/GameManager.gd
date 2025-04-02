@@ -1,8 +1,12 @@
 class_name GameManager extends Node2D
 
 @onready var player: Player = $"../Player"
-@onready var camera_1: Camera2D = $"../Level1/Camera1"
+@onready var camera_1: Camera2D = $"../Scenario/Camera1"
 @onready var warp_timer: Timer = $WarpTimer
+
+@onready var how_to_move: Label = $"../Scenario/How to move"
+@onready var enter_mirror_world: Label = $"../Scenario/Enter Mirror World"
+@onready var good_luck: Label = $"../Scenario/Good Luck!"
 
 @export var closing_wall: PolygonStructure
 
@@ -27,8 +31,6 @@ func warp_to_mirror(mirror: Node2D, camera: Camera2D) -> void:
 	player.global_position = mirror_to_go.global_position
 	player.air_dash_available = true
 	
-	# player.swap_gravity() -> not needed anymore?
-	
 	player.oni.flip_v = !player.oni.flip_v
 	
 	# switch camera to Mirror World
@@ -41,9 +43,8 @@ func start_close_door() -> void:
 	closing_wall.close()
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
-
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	pass # Replace with function body.
+func _on_show_good_luck_body_entered(body: Node2D) -> void:
+	if body is Player:
+		how_to_move.visible = false
+		enter_mirror_world.visible = false
+		good_luck.visible = true

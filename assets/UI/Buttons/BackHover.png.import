@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buxtbohji4rli"
-path="res://.godot/imported/wall_piece.png-c51c67c128c03e858a832cb6aa91b242.ctex"
+uid="uid://b4qihcuy4w8je"
+path="res://.godot/imported/BackHover.png-adc255a1a6966db39f5fd30b1fe4b519.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Textures/wall_piece.png"
-dest_files=["res://.godot/imported/wall_piece.png-c51c67c128c03e858a832cb6aa91b242.ctex"]
+source_file="res://assets/UI/Buttons/BackHover.png"
+dest_files=["res://.godot/imported/BackHover.png-adc255a1a6966db39f5fd30b1fe4b519.ctex"]
 
 [params]
 

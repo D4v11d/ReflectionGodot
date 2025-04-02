@@ -5,10 +5,11 @@ class_name Player extends CharacterBody2D
 @onready var dash_again_timer: Timer = $DashAgainTimer
 @onready var animation_time: Timer = $AnimationTime
 @onready var warp_timer: Timer = $WarpTimer
-@onready var camera_1: Camera2D = $"../Level1/Camera1"
+@onready var camera_1: Camera2D = $"../Scenario/Camera1"
+@onready var dash_sound: AudioStreamPlayer2D = $DashSound
 
 const SPEED = 700.0
-const JUMP_VELOCITY = -1200.0
+const JUMP_VELOCITY = -1500.0
 const DASH_SPEED = 4000.0
 
 # For crate push
@@ -25,31 +26,31 @@ func _ready() -> void:
 	oni.flip_h = true
 
 func _physics_process(delta: float) -> void:
-	
 	if is_on_floor() or is_on_ceiling():
 		air_dash_available = true
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * 2.5 * delta * get_gravity_direction()
+	
+	# Apply gravity unless dashing
+	if not is_dashing:
+		velocity += get_gravity() * 4 * delta * get_gravity_direction()
 
-	# Handle jump.
+	# Handle jump (supports gravity swap)
 	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or is_on_ceiling()):
-			velocity.y = JUMP_VELOCITY * get_gravity_direction()
+		velocity.y = JUMP_VELOCITY * get_gravity_direction()
 
-	# Get the input direction and handle the movement/deceleration.
+	# Get the input direction and handle the movement/deceleration
 	var direction := Input.get_axis("move_left", "move_right")
 	if direction and !is_dashing:
 		looking_direction = direction
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
+	
 	if direction > 0:
 		oni.flip_h = true
 	elif direction < 0:
 		oni.flip_h = false
 	
-	# Dash	
+	# Dash
 	handle_dash()
 	
 	# Push Crates
@@ -57,51 +58,40 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
 func handle_dash() -> void:
 	if Input.is_action_just_pressed("dash") and dash_available:
-		
 		if not is_on_floor() and not is_on_ceiling() and not air_dash_available:
-			return  # Exit if no air dash is available
-			
-		# start timers
-		dash_timer.start() # air time
-		animation_time.start() # animation time
-		dash_again_timer.start() # time before player can dash again
+			return
+		
+		dash_sound.play()
+		dash_timer.start()
+		animation_time.start()
+		dash_again_timer.start()
 		dash_available = false
-			
 		velocity.x = looking_direction * DASH_SPEED
 		is_dashing = true
 		velocity.y = 0
 		oni.play("dash")
-		
-		if not is_on_floor() and not is_on_ceiling(): 
+		if not is_on_floor() and not is_on_ceiling():
 			air_dash_available = false
-
 
 func handle_push_crate() -> void:
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var crate = collision.get_collider()
-		
 		if crate.is_in_group("crates") and abs(crate.get_linear_velocity().x) < MAX_VELOCITY:
-			crate.apply_central_impulse(collision.get_normal() * - PUSH_FORCE)
-
+			crate.apply_central_impulse(collision.get_normal() * -PUSH_FORCE)
 
 func _on_dash_timer_timeout() -> void:
 	velocity.x = move_toward(velocity.x, 0, SPEED)
 	is_dashing = false
 
-
 func _on_animation_time_timeout() -> void:
-	
 	oni.play("idle")
-
 
 func _on_dash_again_timer_timeout() -> void:
 	dash_available = true
-	
-	
+
 func get_gravity_direction() -> float:
 	if is_dashing:
 		return 0.0
